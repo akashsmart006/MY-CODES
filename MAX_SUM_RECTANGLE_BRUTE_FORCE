@@ -1,0 +1,73 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+	
+int main()
+{
+	int t;
+	cin>>t;
+	for(int ts=0;ts<t;ts++)
+	{
+	vector<vector<int> > v2;
+	vector<int> v1;
+	int n,m,a;
+	cin>>n>>m;
+	for(int i=0;i<n;i++)
+	{
+		for(int j=0;j<m;j++)
+		{
+			cin>>a;
+			v1.push_back(a);
+		}
+		v2.push_back(v1);
+		v1.clear();
+	}
+	int sum=0,best=0,cnt=0,d=v2[0][0];
+	for(int i=0;i<n;i++)
+	{
+		for(int j=0;j<m;j++)
+		{
+			if(v2[i][j]<0)
+			{
+				cnt++;
+				if(v2[i][j]>d)
+				{
+					d=v2[i][j];
+				}
+			}
+		}
+	}
+
+	
+	for(int i=0;i<n;i++)
+	{
+		for(int j=0;j<m;j++)
+		{
+			for(int r1=i;r1<n;r1++)
+			{
+				for(int c1=j;c1<m;c1++)
+				{
+					for(int k1=i;k1<=r1;k1++)
+					{
+						for(int k2=j;k2<=c1;k2++)
+						{
+							sum=sum+v2[k1][k2];
+						}
+					}
+					best=max(sum,best);
+					sum=0;
+				}
+			}
+		}
+    }
+    if(cnt==n*m)
+    {
+    	cout<<"ans :"<<d<<endl;
+	}
+	else
+	{
+		cout<<"ans :"<<best<<endl;
+	}
+
+	}
+}
