@@ -1,0 +1,62 @@
+#include<bits/stdc++.h>
+using namespace std;
+	
+int main()
+{
+	int n,m,a,max_sum=0,cnt=0,d=0;
+	cin>>n>>m;
+	vector<vector<int> > arr(n,vector<int>(m,0));
+	for(int i=0;i<n;i++)
+	{
+		for(int j=0;j<m;j++)
+		{
+			cin>>a;
+			arr[i][j]=a;
+			if(a<0)
+			{
+				cnt++;
+			}
+		}
+	}
+	d=arr[0][0];
+	if(cnt==n*m)
+	{
+		for(int i=0;i<n;i++)
+		{
+			for(int j=0;j<m;j++)
+			{
+				if(arr[i][j]>d)
+				{
+					d=arr[i][j];
+				}
+			}
+		}
+		cout<<d<<endl;
+	}
+	else
+	{
+	for(int i=0;i<m;i++)
+	{
+		vector<int> v1(n,0);
+		for(int j=i;j<m;j++)
+		{
+			int cur_sum=0;
+			for(int k=0;k<n;k++)
+			{
+				v1[k]=v1[k]+arr[k][j];
+				cur_sum=cur_sum+v1[k];
+				if(cur_sum>max_sum)
+				{
+					max_sum=cur_sum;
+				}
+				if(cur_sum<0)
+				{
+					cur_sum=0;
+				}
+			}
+		}
+	}
+	cout<<max_sum<<endl;
+
+	}
+}
